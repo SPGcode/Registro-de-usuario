@@ -27,15 +27,15 @@ function getInput() {
     if (dniUsuario.value === "") {
         alert("No hay valor en el campo DNI");
     } else {
+        
         persona.dni = dniUsuario.value + letraDni.value;
-
+        darLetra();
     }
 };
 
 //Validacion del campo de la letra
 function valLetra() {
     letra = letraDni.value
-    console.log(letra.length);
 
     if (letra == "" || letra.length !== 1) {
         alert("debe introduzir una letra");
@@ -45,14 +45,34 @@ function valLetra() {
         alert("Por favor rellene el formulario para inscribirse");
 
     }
+    darLetra();
 
 }
 
+function valDni (){
+    if (dniUsuario.value === ""){
+        alert("debe introducir el DNI")
+    } 
+}
+
+//Crear una funcion que te de la letra del DNI
+function darLetra() {
+      // almaceno en una variable la cuenta para hallar la letra del DNI 
+        let cuenta = dniUsuario.value % 23;
+        let indice = letrasDni.indexOf(letraDni.value);
+        //Valído la letra
+        if (cuenta === indice){
+            return true;
+        } else{
+            alert("La letra no coincide con su número DNI");
+        }
+    }
+      
 //Evento aparece formulario
 function formApear() {
 
-    let inputName = "<input id='nombre' type='text' placeholder='nombre'><input id='apellidos' type='text' placeholder='Apellidos'><input id='edad' type='text' placeholder='edad'><input id='correo' type='text' placeholder='correo'>";
-    form.innerHTML = inputName;
+    let inputForm = "<input id='nombre' type='text' placeholder='nombre'><input id='apellidos' type='text' placeholder='Apellidos'><input id='edad' type='text' placeholder='edad'><input id='correo' type='text' placeholder='correo'>";
+    form.innerHTML = inputForm;
     form.appendChild(div);
     body.appendChild(form);
 
@@ -61,6 +81,7 @@ function formApear() {
 
 //importar valores de los input y añadirlos como propiedades al objeto persona
 function getForm() {
+    valDni();
     let inputNombre = document.getElementById("nombre");
     let inputApellidos = document.getElementById("apellidos");
     let inputEdad = document.getElementById("edad");
@@ -70,15 +91,25 @@ function getForm() {
     persona.apellidos = inputApellidos.value;
     persona.edad = inputEdad.value;
     persona.correo = inputCorreo.value;
-    if (getForm) {
-        mostrarObjeto();
-    }
+    reset();
+    none();
 }
 
 function reset() {
     dniUsuario.value = "";
     letraDni.value = "";
     form.remove();
+}
+
+function none (){
+    let divH = document.getElementById("header");
+    divH.remove();
+
+    let newDiv = document.createElement("div");
+    let content = "<div id='newDiv' class='centrar'><img id='img' src='img/web.png'></div>"
+    newDiv.innerHTML = content;
+    body.appendChild(newDiv);
+   
 }
 
 function mostrarObjeto() {
