@@ -12,24 +12,40 @@ const btnForm = document.getElementById("btnForm");
 
 
 
+
 function init() {
     //cargo los eventos una vez a cargado todo el código
     btnReset.addEventListener("click", reset, false);
-    btnSubmit.addEventListener("click", valLetra, false);
     btnSubmit.addEventListener("click", getInput, false);
     btnForm.addEventListener("click", getForm, false);
 
 
 }
 
+//Crear una funcion que te de la letra del DNI
+function darLetra() {
+    // almaceno en una variable la cuenta para hallar la letra del DNI 
+    let cuenta = dniUsuario.value % 23;
+    let indice = letrasDni.indexOf(letraDni.value);
+    //Valído la letra
+    if (cuenta === indice) {
+        return true;
+    } else {
+        alert("La letra no coincide con su número DNI");
+    }
+}
+
+
 //importar valores de los input y añadirlos como propiedades al objeto persona
 function getInput() {
+    let igualLetra = darLetra();
     if (dniUsuario.value === "") {
         alert("No hay valor en el campo DNI");
+    } else if(igualLetra){
+        valLetra();
     } else {
-        
+    
         persona.dni = dniUsuario.value + letraDni.value;
-        darLetra();
     }
 };
 
@@ -45,29 +61,14 @@ function valLetra() {
         alert("Por favor rellene el formulario para inscribirse");
 
     }
-    darLetra();
-
 }
 
-function valDni (){
-    if (dniUsuario.value === ""){
+function valDni() {
+    if (dniUsuario.value === "") {
         alert("debe introducir el DNI")
-    } 
+    }
 }
 
-//Crear una funcion que te de la letra del DNI
-function darLetra() {
-      // almaceno en una variable la cuenta para hallar la letra del DNI 
-        let cuenta = dniUsuario.value % 23;
-        let indice = letrasDni.indexOf(letraDni.value);
-        //Valído la letra
-        if (cuenta === indice){
-            return true;
-        } else{
-            alert("La letra no coincide con su número DNI");
-        }
-    }
-      
 //Evento aparece formulario
 function formApear() {
 
@@ -101,7 +102,7 @@ function reset() {
     form.remove();
 }
 
-function none (){
+function none() {
     let divH = document.getElementById("header");
     divH.remove();
 
@@ -109,7 +110,7 @@ function none (){
     let content = "<div id='newDiv' class='centrar'><img id='img' src='img/web.png'></div>"
     newDiv.innerHTML = content;
     body.appendChild(newDiv);
-   
+
 }
 
 function mostrarObjeto() {
