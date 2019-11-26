@@ -31,41 +31,30 @@ function darLetra() {
     if (cuenta === indice) {
         return true;
     } else {
-        alert("La letra no coincide con su número DNI");
+      alert("Introduzca la letra correcta");
+        return false;
     }
+   
 }
-
 
 //importar valores de los input y añadirlos como propiedades al objeto persona
 function getInput() {
-    let igualLetra = darLetra();
-    if (dniUsuario.value === "") {
-        alert("No hay valor en el campo DNI");
-    } else if(igualLetra){
-        valLetra();
-    } else {
-    
+    valDni();
+    let laLetra = darLetra();
+    if (laLetra !== false) {
         persona.dni = dniUsuario.value + letraDni.value;
+        formApear();
+    } else {
+        return false;
     }
 };
 
-//Validacion del campo de la letra
-function valLetra() {
-    letra = letraDni.value
-
-    if (letra == "" || letra.length !== 1) {
-        alert("debe introduzir una letra");
-    } else {
-        alert("su letra es: " + letraDni.value);
-        formApear();
-        alert("Por favor rellene el formulario para inscribirse");
-
-    }
-}
-
 function valDni() {
-    if (dniUsuario.value === "") {
-        alert("debe introducir el DNI")
+    if (dniUsuario.value == "") {
+        alert("debe introducir el DNI");
+        
+    } else{
+        return true;
     }
 }
 
@@ -82,12 +71,11 @@ function formApear() {
 
 //importar valores de los input y añadirlos como propiedades al objeto persona
 function getForm() {
-    valDni();
     let inputNombre = document.getElementById("nombre");
     let inputApellidos = document.getElementById("apellidos");
     let inputEdad = document.getElementById("edad");
     let inputCorreo = document.getElementById("correo");
-
+  
     persona.nombre = inputNombre.value;
     persona.apellidos = inputApellidos.value;
     persona.edad = inputEdad.value;
