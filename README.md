@@ -1,4 +1,4 @@
-# Registro-de-usuario
+# Registro-de-usuario Front end
 Un registro de usuario con su DNI y datos personales
 
 Es una página donde te registras con tus datos personales y DNI.
